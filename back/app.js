@@ -3,7 +3,6 @@ var bodyparser = require('body-parser');
 var mongoose = require('mongoose');
 var port = process.env.PORT || 4201;
 
-var app = express();
 
 // ROUTES
 
@@ -12,6 +11,8 @@ var categoria_routes = require('./routes/categoria');
 var producto_routes = require('./routes/producto');
 var cliente_routes = require('./routes/cliente');
 var venta_routes = require('./routes/venta');
+
+var app = express();
 
 
 mongoose.connect('mongodb://localhost:27017/sistema',{useUnifiedTopology: true, useNewUrlParser:true}, (err, res) =>{
