@@ -1,10 +1,33 @@
 var Cliente = require('../models/cliente');
 
+function listar(req, res){
+    Cliente.find((err, clientes_data)=>{
+        if(clientes_data){
+            res.status(200).send({clientes: clientes_data});
+        }else{
+            res.status(403).sen({message: 'No hay clientes registrados'});
+        }
+    });
+}
+
+function get_cliente(req, res){
+    var id = req.params['id'];
+    
+    Cliente.findById(id,(err, cliente_data)=>{
+        if(cliente_data){
+            res.status(200).send({cliente: cliente_data});
+        }
+    })
+}
+
+
+
 function registrar(req, res){
     let data = req.body;
     var cliente = new Cliente();
     cliente.nombres = data.nombres;
     cliente.correo = data.correo;
+    cliente.dni = data.dni;
 
 
     cliente.save ((err, cliente_save)=>{
@@ -46,4 +69,6 @@ module.exports = {
     registrar,
     editar,
     eliminar,
+    listar,
+    get_cliente,
 }
